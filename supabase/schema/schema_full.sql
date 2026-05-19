@@ -272,6 +272,107 @@ CREATE TABLE luna_5e_growth_path_map (
 
 
 -- =============================================================================
+-- BLOCK 3 — User Event & State Tables
+-- =============================================================================
+
+-- luna_4b_user_life_phase
+CREATE TABLE IF NOT EXISTS luna_4b_user_life_phase (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id integer     REFERENCES luna_0_profiles(id),
+  phase_name text        NOT NULL,
+  notiz      text,
+  created_at timestamptz DEFAULT now()
+);
+
+-- luna_5d_user_body_signal
+CREATE TABLE IF NOT EXISTS luna_5d_user_body_signal (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id integer     REFERENCES luna_0_profiles(id),
+  signal     text        NOT NULL,
+  kontext    text,
+  created_at timestamptz DEFAULT now()
+);
+
+-- luna_5e_user_growth_path
+CREATE TABLE IF NOT EXISTS luna_5e_user_growth_path (
+  id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id  integer     REFERENCES luna_0_profiles(id),
+  pfad        text        NOT NULL,
+  fortschritt numeric,
+  created_at  timestamptz DEFAULT now()
+);
+
+-- luna_5c_user_stress_response
+CREATE TABLE IF NOT EXISTS luna_5c_user_stress_response (
+  id            uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id    integer     REFERENCES luna_0_profiles(id),
+  response_name text        NOT NULL,
+  notiz         text,
+  created_at    timestamptz DEFAULT now()
+);
+
+-- luna_user_magic_moments
+CREATE TABLE IF NOT EXISTS luna_user_magic_moments (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id   integer     REFERENCES luna_0_profiles(id),
+  beschreibung text        NOT NULL,
+  created_at   timestamptz DEFAULT now()
+);
+
+-- luna_user_needs
+CREATE TABLE IF NOT EXISTS luna_user_needs (
+  id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id  integer     REFERENCES luna_0_profiles(id),
+  need_name   text        NOT NULL,
+  intensitaet numeric,
+  created_at  timestamptz DEFAULT now()
+);
+
+-- luna_user_identity_phase
+CREATE TABLE IF NOT EXISTS luna_user_identity_phase (
+  id            uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id    integer     REFERENCES luna_0_profiles(id),
+  identity_name text        NOT NULL,
+  created_at    timestamptz DEFAULT now()
+);
+
+-- luna_user_protection_patterns
+CREATE TABLE IF NOT EXISTS luna_user_protection_patterns (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id   integer     REFERENCES luna_0_profiles(id),
+  pattern_name text        NOT NULL,
+  intensitaet  numeric,
+  created_at   timestamptz DEFAULT now()
+);
+
+-- luna_user_scores
+CREATE TABLE IF NOT EXISTS luna_user_scores (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id integer     REFERENCES luna_0_profiles(id),
+  dimension  text        NOT NULL,
+  score      numeric,
+  created_at timestamptz DEFAULT now()
+);
+
+-- luna_user_journal
+CREATE TABLE IF NOT EXISTS luna_user_journal (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id integer     REFERENCES luna_0_profiles(id),
+  eintrag    text        NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- luna_user_progress
+CREATE TABLE IF NOT EXISTS luna_user_progress (
+  id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id  integer     REFERENCES luna_0_profiles(id),
+  modul       text        NOT NULL,
+  fortschritt numeric,
+  created_at  timestamptz DEFAULT now()
+);
+
+
+-- =============================================================================
 -- MODULE 6 — Strategy / Expression / Effect Space
 -- =============================================================================
 
