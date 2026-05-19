@@ -272,6 +272,37 @@ CREATE TABLE luna_5e_growth_path_map (
 
 
 -- =============================================================================
+-- BLOCK 6 — Growth Engine
+-- =============================================================================
+
+CREATE TABLE IF NOT EXISTS luna_growth_dimensions (
+  id                   integer     PRIMARY KEY,
+  name                 text        UNIQUE NOT NULL,
+  dimension_ref        text,
+  beschreibung         text,
+  messkriterium        text,
+  stufe_1_bezeichnung  text,
+  stufe_2_bezeichnung  text,
+  stufe_3_bezeichnung  text,
+  stufe_4_bezeichnung  text,
+  stufe_5_bezeichnung  text,
+  created_at           timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_milestone_types (
+  id                  integer     PRIMARY KEY,
+  growth_dimension_id integer     NOT NULL REFERENCES luna_growth_dimensions(id),
+  stufe               integer     NOT NULL CHECK (stufe BETWEEN 1 AND 5),
+  name                text,
+  beschreibung        text,
+  kriterium           text,
+  coaching_impuls     text,
+  naechster_schritt   text,
+  created_at          timestamptz DEFAULT now()
+);
+
+
+-- =============================================================================
 -- BLOCK 5 — Module & Programme
 -- =============================================================================
 
