@@ -272,6 +272,157 @@ CREATE TABLE luna_5e_growth_path_map (
 
 
 -- =============================================================================
+-- BLOCK 7 — Identity AI Layer
+-- =============================================================================
+
+-- 1. Identity State
+CREATE TABLE IF NOT EXISTS luna_identity_state (
+  id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id             uuid,
+  identity_staerkend  text,
+  identity_loslassend text,
+  energie_lebend      text,
+  energie_brauchend   text,
+  updated_at          timestamptz DEFAULT now(),
+  created_at          timestamptz DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS luna_identity_state_types (
+  id           integer PRIMARY KEY,
+  kategorie    text NOT NULL,
+  name         text NOT NULL,
+  beschreibung text
+);
+
+-- 2. Emotional State
+CREATE TABLE IF NOT EXISTS luna_emotional_state_types (
+  id             integer PRIMARY KEY,
+  name           text NOT NULL,
+  name_de        text,
+  valenz         text,
+  energie        text,
+  luna_reaktion  text,
+  coaching_modus text
+);
+CREATE TABLE IF NOT EXISTS luna_user_emotional_state (
+  id                      uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id                 uuid,
+  emotional_state_type_id integer REFERENCES luna_emotional_state_types(id),
+  intensitaet             integer DEFAULT 3 CHECK (intensitaet BETWEEN 1 AND 5),
+  kontext                 text,
+  erfasst_am              timestamptz DEFAULT now()
+);
+
+-- 3. Intentions Tracking
+CREATE TABLE IF NOT EXISTS luna_intention_types (
+  id           integer PRIMARY KEY,
+  name         text NOT NULL,
+  beschreibung text,
+  dimension    text,
+  energie      text
+);
+CREATE TABLE IF NOT EXISTS luna_user_intentions (
+  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id           uuid,
+  intention_type_id integer REFERENCES luna_intention_types(id),
+  aktiv             boolean DEFAULT true,
+  prioritaet        integer DEFAULT 1 CHECK (prioritaet BETWEEN 1 AND 3),
+  notiz             text,
+  gesetzt_am        timestamptz DEFAULT now(),
+  erreicht_am       timestamptz
+);
+
+-- 4. Pattern Recognition
+CREATE TABLE IF NOT EXISTS luna_pattern_types (
+  id            integer PRIMARY KEY,
+  name          text NOT NULL,
+  kategorie     text,
+  beschreibung  text,
+  luna_reaktion text,
+  schwellenwert integer
+);
+CREATE TABLE IF NOT EXISTS luna_user_patterns (
+  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id         uuid,
+  pattern_type_id integer REFERENCES luna_pattern_types(id),
+  erkannt_am      timestamptz DEFAULT now(),
+  aktiv           boolean DEFAULT true,
+  kontext         text
+);
+
+-- 5. Energy Profile
+CREATE TABLE IF NOT EXISTS luna_energy_profile_types (
+  id            integer PRIMARY KEY,
+  name          text NOT NULL,
+  beschreibung  text,
+  sprache_stil  text,
+  beispiel_satz text,
+  farbe         text,
+  passend_fuer  text
+);
+CREATE TABLE IF NOT EXISTS luna_user_energy_profile (
+  id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id                uuid,
+  energy_profile_type_id integer REFERENCES luna_energy_profile_types(id),
+  aktiv                  boolean DEFAULT true,
+  updated_at             timestamptz DEFAULT now()
+);
+
+-- 6. Relationship State
+CREATE TABLE IF NOT EXISTS luna_relationship_state_types (
+  id             integer PRIMARY KEY,
+  name           text NOT NULL,
+  beschreibung   text,
+  luna_haltung   text,
+  coaching_tiefe text
+);
+CREATE TABLE IF NOT EXISTS luna_user_relationship_state (
+  id                         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id                    uuid,
+  relationship_state_type_id integer REFERENCES luna_relationship_state_types(id),
+  vertrauens_score           integer DEFAULT 50 CHECK (vertrauens_score BETWEEN 0 AND 100),
+  notiz                      text,
+  updated_at                 timestamptz DEFAULT now()
+);
+
+-- 7. Life Context
+CREATE TABLE IF NOT EXISTS luna_life_context_types (
+  id             integer PRIMARY KEY,
+  name           text NOT NULL,
+  kategorie      text,
+  beschreibung   text,
+  luna_anpassung text
+);
+CREATE TABLE IF NOT EXISTS luna_user_life_context (
+  id                   uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id              uuid,
+  life_context_type_id integer REFERENCES luna_life_context_types(id),
+  aktiv                boolean DEFAULT true,
+  intensitaet          integer DEFAULT 3 CHECK (intensitaet BETWEEN 1 AND 5),
+  erfasst_am           timestamptz DEFAULT now()
+);
+
+-- 8. Momentum Score
+CREATE TABLE IF NOT EXISTS luna_momentum_score_types (
+  id          integer PRIMARY KEY,
+  name        text NOT NULL,
+  bereich_von integer,
+  bereich_bis integer,
+  beschreibung text,
+  luna_modus  text,
+  farbe       text
+);
+CREATE TABLE IF NOT EXISTS luna_user_momentum (
+  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       uuid,
+  score         integer DEFAULT 50 CHECK (score BETWEEN 0 AND 100),
+  score_type_id integer REFERENCES luna_momentum_score_types(id),
+  berechnet_aus text,
+  updated_at    timestamptz DEFAULT now(),
+  created_at    timestamptz DEFAULT now()
+);
+
+
+-- =============================================================================
 -- BLOCK 6 — Growth Engine
 -- =============================================================================
 
