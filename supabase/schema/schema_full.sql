@@ -272,6 +272,45 @@ CREATE TABLE luna_5e_growth_path_map (
 
 
 -- =============================================================================
+-- BLOCK 9 — Modul-Energie-Verknüpfung + Luna-Stimme
+-- =============================================================================
+
+CREATE TABLE IF NOT EXISTS luna_module_energy_map (
+  id                  integer PRIMARY KEY,
+  modul_id            integer,
+  modul_name          text NOT NULL,
+  primaer_profil_id   integer REFERENCES luna_energy_profile_types(id),
+  sekundaer_profil_id integer REFERENCES luna_energy_profile_types(id),
+  kombination_id      integer REFERENCES luna_tone_combinations(id),
+  einstieg_satz       text,
+  uebergangs_satz     text,
+  abschluss_satz      text,
+  warum               text
+);
+
+CREATE TABLE IF NOT EXISTS luna_voice_dna (
+  id            integer PRIMARY KEY,
+  kategorie     text NOT NULL,
+  name          text NOT NULL,
+  beschreibung  text,
+  beispiel_mit  text,
+  beispiel_ohne text,
+  regel         text
+);
+
+CREATE TABLE IF NOT EXISTS luna_voice_patterns (
+  id             integer PRIMARY KEY,
+  moment         text NOT NULL,
+  beschreibung   text,
+  pattern_1      text,
+  pattern_2      text,
+  pattern_3      text,
+  nie_sagen      text,
+  energie_profil text
+);
+
+
+-- =============================================================================
 -- BLOCK 8 — Memory, Voice & Transformation Layer
 -- =============================================================================
 
