@@ -21,6 +21,14 @@
 --   created_at timestamptz DEFAULT now()
 -- );
 
+-- Seed/test profile table (NOT the Supabase Auth profiles table)
+CREATE TABLE IF NOT EXISTS luna_0_profiles (
+  id           integer     PRIMARY KEY,
+  username     text        UNIQUE NOT NULL,
+  display_name text        NOT NULL,
+  created_at   timestamptz DEFAULT now()
+);
+
 CREATE TABLE IF NOT EXISTS luna_0a_message (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   profile_id uuid        REFERENCES profiles(id),
@@ -33,10 +41,13 @@ CREATE TABLE IF NOT EXISTS luna_0a_message (
 -- MODULE 1 — Emotion
 -- =============================================================================
 
-CREATE TABLE luna_1a_emotion_types (
-  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
-  name       text        NOT NULL,
-  created_at timestamptz DEFAULT now()
+CREATE TABLE IF NOT EXISTS luna_1a_emotion_types (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name         text        UNIQUE NOT NULL,
+  valenz       text,
+  intensitaet  text,
+  kategorie    text,
+  created_at   timestamptz DEFAULT now()
 );
 
 CREATE TABLE luna_1b_emotion_events (
@@ -60,9 +71,36 @@ CREATE TABLE luna_1c_emotion_need_map (
 -- Note: luna_2c_core_identity was renamed → luna_2c_core_identity_types
 -- =============================================================================
 
--- luna_2a and luna_2b type/event tables — add here when names are confirmed
--- CREATE TABLE luna_2a_... (...);
--- CREATE TABLE luna_2b_... (...);
+CREATE TABLE IF NOT EXISTS luna_1a_need_types (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- luna_2a and luna_2b type tables
+CREATE TABLE IF NOT EXISTS luna_2a_arche_types (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  ziel       text,
+  staerke    text,
+  schatten   text,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_2b_identity_types (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_2b_core_motivation (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  wunsch     text,
+  angst      text,
+  antrieb    text,
+  created_at timestamptz DEFAULT now()
+);
 
 CREATE TABLE luna_2c_core_identity_types (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
