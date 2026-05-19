@@ -272,6 +272,28 @@ CREATE TABLE luna_5e_growth_path_map (
 
 
 -- =============================================================================
+-- BLOCK 5 — Module & Programme
+-- =============================================================================
+
+CREATE TABLE IF NOT EXISTS luna_module_definitions (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  stufe      text,
+  kernfrage  text,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_programs (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name         text        UNIQUE NOT NULL,
+  dauer        text,
+  zielgruppe   text,
+  beschreibung text,
+  created_at   timestamptz DEFAULT now()
+);
+
+
+-- =============================================================================
 -- BLOCK 3 — User Event & State Tables
 -- =============================================================================
 
