@@ -128,11 +128,21 @@ CREATE TABLE luna_2c_core_identity_map (
 -- MODULE 3 — Nervous System
 -- =============================================================================
 
--- TODO: confirm exact name of module 3 type table
-CREATE TABLE luna_3a_nervous_system_types (
+-- Minimal stub (kept for FK references in luna_3b/3c)
+CREATE TABLE IF NOT EXISTS luna_3a_nervous_system_types (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   name       text        NOT NULL,
   created_at timestamptz DEFAULT now()
+);
+
+-- Full type table with nervous system details (Block 2 Stammdaten)
+CREATE TABLE IF NOT EXISTS luna_3a_nervous_system (
+  id             uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name           text        UNIQUE NOT NULL,
+  system         text,
+  empfindung     text,
+  koerper_signal text,
+  created_at     timestamptz DEFAULT now()
 );
 
 CREATE TABLE luna_3b_nervous_system_events (
@@ -155,10 +165,20 @@ CREATE TABLE luna_3c_nervous_system_map (
 -- MODULE 4 — Life Phase
 -- =============================================================================
 
--- TODO: confirm exact name of module 4 type table
-CREATE TABLE luna_4a_life_phase_types (
+-- Minimal stub (kept for FK references in luna_4c)
+CREATE TABLE IF NOT EXISTS luna_4a_life_phase_types (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   name       text        NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- Full type table with life phase details (Block 2 Stammdaten)
+CREATE TABLE IF NOT EXISTS luna_4a_life_phase (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  alter_von  integer,
+  alter_bis  integer,
+  thema      text,
   created_at timestamptz DEFAULT now()
 );
 
@@ -177,8 +197,38 @@ CREATE TABLE luna_4c_life_phase_map (
 -- MODULE 5 — Stress Response / Body Signal / Growth Path
 -- =============================================================================
 
+-- Block 2 type tables for Module 5
+CREATE TABLE IF NOT EXISTS luna_5a_protective_pattern (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  funktion   text,
+  ausloser   text,
+  kosten     text,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_5b_shadow_pattern (
+  id          uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name        text        UNIQUE NOT NULL,
+  integration text,
+  trigger     text,
+  ressource   text,
+  created_at  timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_5c_stress_response (
+  id             uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name           text        UNIQUE NOT NULL,
+  modus          text,
+  koerper_signal text,
+  gedanke        text,
+  verhalten      text,
+  created_at     timestamptz DEFAULT now()
+);
+
+-- Minimal stubs (kept for FK references in map tables)
 -- TODO: confirm exact names of module 5 type tables
-CREATE TABLE luna_5a_stress_response_types (
+CREATE TABLE IF NOT EXISTS luna_5a_stress_response_types (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   name       text        NOT NULL,
   created_at timestamptz DEFAULT now()
