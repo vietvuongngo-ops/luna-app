@@ -272,6 +272,116 @@ CREATE TABLE luna_5e_growth_path_map (
 
 
 -- =============================================================================
+-- BLOCK 8 — Memory, Voice & Transformation Layer
+-- =============================================================================
+
+-- System 1: Memory Layer
+CREATE TABLE IF NOT EXISTS luna_user_memories (
+  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id         uuid,
+  kategorie       text,
+  inhalt          text NOT NULL,
+  bedeutung       text,
+  dimension_ref   text,
+  emotional_tag   text,
+  aktiv           boolean DEFAULT true,
+  referenziert_am timestamptz,
+  erstellt_am     timestamptz DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS luna_session_context (
+  id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id                uuid,
+  session_nummer         integer,
+  datum                  timestamptz DEFAULT now(),
+  emotional_state_id     integer REFERENCES luna_emotional_state_types(id),
+  momentum_score         integer CHECK (momentum_score BETWEEN 0 AND 100),
+  life_context_id        integer REFERENCES luna_life_context_types(id),
+  energie_profil_id      integer REFERENCES luna_energy_profile_types(id),
+  hauptthema             text,
+  key_insight            text,
+  offene_frage           text,
+  naechste_session_focus text,
+  abgeschlossen          boolean DEFAULT false,
+  erstellt_am            timestamptz DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS luna_user_breakthroughs (
+  id             uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id        uuid,
+  titel          text NOT NULL,
+  beschreibung   text,
+  dimension_ref  text,
+  milestone_id   integer REFERENCES luna_milestone_types(id),
+  zitat          text,
+  luna_reaktion  text,
+  feierlich_am   timestamptz DEFAULT now(),
+  aktiv_referenz boolean DEFAULT true
+);
+
+-- System 2: Voice & Tone Engine
+CREATE TABLE IF NOT EXISTS luna_tone_rules (
+  id                 integer PRIMARY KEY,
+  name               text NOT NULL,
+  beschreibung       text,
+  emotional_state_id integer REFERENCES luna_emotional_state_types(id),
+  momentum_min       integer DEFAULT 0,
+  momentum_max       integer DEFAULT 100,
+  energie_profil_id  integer REFERENCES luna_energy_profile_types(id),
+  prioritaet         integer DEFAULT 5,
+  begruendung        text
+);
+CREATE TABLE IF NOT EXISTS luna_tone_combinations (
+  id                  integer PRIMARY KEY,
+  name                text NOT NULL,
+  primaer_profil_id   integer REFERENCES luna_energy_profile_types(id),
+  sekundaer_profil_id integer REFERENCES luna_energy_profile_types(id),
+  beschreibung        text,
+  beispiel_einstieg   text,
+  wann_nutzen         text
+);
+CREATE TABLE IF NOT EXISTS luna_tone_forbidden (
+  id                   integer PRIMARY KEY,
+  emotional_state_id   integer REFERENCES luna_emotional_state_types(id),
+  verbotenes_profil_id integer REFERENCES luna_energy_profile_types(id),
+  grund                text
+);
+
+-- System 3: Transformation Tracking
+CREATE TABLE IF NOT EXISTS luna_transformation_snapshots (
+  id                 uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id            uuid,
+  typ                text NOT NULL,
+  dimension_ref      text,
+  selbstbeschreibung text NOT NULL,
+  emotionaler_zustand text,
+  glaubenssatz       text,
+  koerper_gefuehl    text,
+  momentum_score     integer CHECK (momentum_score BETWEEN 0 AND 100),
+  erfasst_am         timestamptz DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS luna_win_types (
+  id           integer PRIMARY KEY,
+  name         text NOT NULL,
+  kategorie    text,
+  beschreibung text,
+  emoji        text,
+  luna_feier   text
+);
+CREATE TABLE IF NOT EXISTS luna_user_wins (
+  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id       uuid,
+  win_type_id   integer REFERENCES luna_win_types(id),
+  titel         text NOT NULL,
+  beschreibung  text,
+  dimension_ref text,
+  milestone_id  integer REFERENCES luna_milestone_types(id),
+  luna_reaktion text,
+  user_zitat    text,
+  gewonnen_am   timestamptz DEFAULT now(),
+  feierlich     boolean DEFAULT true
+);
+
+
+-- =============================================================================
 -- BLOCK 7 — Identity AI Layer
 -- =============================================================================
 
