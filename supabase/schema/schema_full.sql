@@ -499,8 +499,52 @@ CREATE TABLE luna_7c_potential_map (
 -- Note: luna_8b and luna_8c each have two event tables — confirm numbering.
 -- =============================================================================
 
+-- Block 4 type tables for Module 8
+CREATE TABLE IF NOT EXISTS luna_8a_core_value_types (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  bereich    text,
+  spannung   text,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_8a_core_need_types (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_8b_coping_strategy (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  potenzial  text,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_8b_relationship_pattern (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name         text        UNIQUE NOT NULL,
+  bindungsstil text,
+  muster       text,
+  integration  text,
+  created_at   timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_8d_deep_potential (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS luna_8e_being_potential (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  created_at timestamptz DEFAULT now()
+);
+
+-- Minimal stubs (kept for FK references in event tables)
 -- TODO: confirm exact names of module 8 type tables
-CREATE TABLE luna_8a_coping_strategy_types (
+CREATE TABLE IF NOT EXISTS luna_8a_coping_strategy_types (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   name       text        NOT NULL,
   created_at timestamptz DEFAULT now()
@@ -603,8 +647,18 @@ CREATE TABLE luna_8c_values_map (
 -- MODULE 9 — Vision
 -- =============================================================================
 
+-- Block 4 type table for Module 9
+CREATE TABLE IF NOT EXISTS luna_9a_vision_archetypes (
+  id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  name       text        UNIQUE NOT NULL,
+  aufgabe    text,
+  leitsatz   text,
+  created_at timestamptz DEFAULT now()
+);
+
+-- Minimal stub (kept for FK references in luna_9c_vision_map)
 -- TODO: confirm exact name of module 9 type table
-CREATE TABLE luna_9a_vision_types (
+CREATE TABLE IF NOT EXISTS luna_9a_vision_types (
   id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
   name       text        NOT NULL,
   created_at timestamptz DEFAULT now()
