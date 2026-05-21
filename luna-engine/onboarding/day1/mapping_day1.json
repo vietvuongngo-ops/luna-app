@@ -1,0 +1,158 @@
+{
+  "day": 1,
+  "intent": "Ankommen, Vertrauen aufbauen & Commitment erzeugen",
+  "aha_moment": "Kein Aha — nur Wärme. Der User fühlt sich gesehen bevor er etwas gesagt hat.",
+  "opus_ready": false,
+  "collect_fields": [
+    "lebensgefuehl",
+    "erster_eindruck",
+    "life_phase",
+    "emotion_type",
+    "commitment_level",
+    "yes_strength",
+    "resistance_detected",
+    "manifestation_resonance"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_1a_emotion_types",
+    "luna_1a_need_types",
+    "luna_4a_life_phase",
+    "luna_3a_nervous_system"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_onboarding",
+      "action": "INSERT",
+      "fields": [
+        "user_id",
+        "status",
+        "current_phase",
+        "day_counter",
+        "program_slug",
+        "started_at"
+      ]
+    },
+    {
+      "table": "luna_daily_collection",
+      "day": 1,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_onboarding_commitment",
+      "fields": [
+        "user_id",
+        "yes_1_strength",
+        "yes_2_strength",
+        "yes_3_strength",
+        "yes_4_strength",
+        "yes_5_strength",
+        "overall_commitment",
+        "resistance_detected",
+        "dominant_emotion",
+        "manifestation_resonance"
+      ]
+    },
+    {
+      "table": "luna_1b_emotion_events",
+      "fields": ["user_id", "emotion_type_id", "intensity", "trigger", "created_at"]
+    },
+    {
+      "table": "luna_1b_need_events",
+      "fields": ["user_id", "need_type_id", "intensity", "created_at"]
+    },
+    {
+      "table": "luna_4b_user_life_phase",
+      "fields": ["user_id", "life_phase_id", "created_at"]
+    }
+  ],
+  "sonnet_output_schema": {
+    "emotion_type_id": "uuid aus luna_1a_emotion_types oder null",
+    "emotion_intensity": "niedrig / mittel / hoch",
+    "need_type_id": "uuid aus luna_1a_need_types oder null",
+    "life_phase_id": "uuid aus luna_4a_life_phase oder null",
+    "life_phase": "Ankommen / Aufbruch / Umbruch / Stagnation / Krise / Neubeginn",
+    "trigger": "erkannter Auslöser für den Start der Reise als kurzer Text",
+    "yes_1_strength": "stark / mittel / schwach",
+    "yes_2_strength": "stark / mittel / schwach",
+    "yes_3_strength": "stark / mittel / schwach",
+    "yes_4_strength": "stark / mittel / schwach",
+    "yes_5_strength": "stark / mittel / schwach",
+    "overall_commitment": "hoch / mittel / niedrig",
+    "resistance_detected": true,
+    "dominant_emotion": "Entschlossenheit / Hoffnung / Angst / Erleichterung / Skepsis / Neugier",
+    "manifestation_resonance": "stark / mittel / schwach",
+    "identity_shift": "erste Beobachtung zur Identität oder null",
+    "need_shift": "erkannte Bedürfnisverschiebung oder null",
+    "pattern": "erkanntes Verhaltensmuster als kurzer Text oder null",
+    "emotional_tone": "dominante Emotion des gesamten Gesprächs",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis des Tages"
+  },
+  "context_from_supabase": [],
+  "phases": [
+    {
+      "phase": 1,
+      "name": "Stolz & Begrüssung",
+      "duration_minutes": 2,
+      "goal": "User fühlt sich gesehen bevor er etwas gesagt hat"
+    },
+    {
+      "phase": 2,
+      "name": "Die Reise bildlich beschreiben",
+      "duration_minutes": 3,
+      "goal": "Neugierde wecken — Höhen, Tiefen, Wachstum ehrlich ansprechen"
+    },
+    {
+      "phase": 3,
+      "name": "Verantwortung übergeben",
+      "duration_minutes": 2,
+      "goal": "Selbstwirksamkeit stärken — Erfolg liegt beim User"
+    },
+    {
+      "phase": 4,
+      "name": "5 Jas — Mikrofon",
+      "duration_minutes": 3,
+      "goal": "Körperliches Commitment erzeugen durch gesprochenes Ja"
+    },
+    {
+      "phase": 5,
+      "name": "Komfortzone ansprechen",
+      "duration_minutes": 2,
+      "goal": "Vorfreude auf Wachstum durch ehrliche Einladung"
+    },
+    {
+      "phase": 6,
+      "name": "Manifestations-Satz & Aufgabe",
+      "duration_minutes": 2,
+      "goal": "Ersten kleinen Sieg noch heute erzeugen"
+    }
+  ],
+  "task": {
+    "title": "Manifestations-Satz täglich sprechen",
+    "text": "Lies diesen Satz heute Abend laut: 'Ich entscheide mich heute bewusst für mein Leben. Ich bin bereit. Ich bin stark genug. Und ich bin nicht allein.' Morgens beim Aufwachen nochmal. Das ist alles.",
+    "duration_minutes": 2,
+    "difficulty": "leicht"
+  },
+  "five_jas": [
+    "Ja — ich nehme mein Leben wieder in die Hand.",
+    "Ja — ich bin bereit, Neues auszuprobieren.",
+    "Ja — ich kehre zurück zu meiner inneren Stärke.",
+    "Ja — ich bin bereit, eine neue Identität zu leben.",
+    "Ja — ich starte diese Reise jetzt gemeinsam mit Luna."
+  ],
+  "aha_trigger": {
+    "type": "commitment_activation",
+    "luna_says": "Das höre ich. Das ist echt. Damit können wir arbeiten.",
+    "if_weak_ja": "Ich höre, dass da noch etwas ist — was ist das?"
+  }
+}

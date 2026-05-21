@@ -1,0 +1,91 @@
+{
+  "day": 3,
+  "intent": "Glaubenssätze aufdecken",
+  "aha_moment": "Das kommt von früher. Das kenne ich.",
+  "opus_ready": false,
+  "collect_fields": [
+    "archetype",
+    "shadow_pattern",
+    "core_belief",
+    "identity_gap",
+    "identity_template",
+    "key_insight"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_daily_collection",
+    "luna_2a_arche_types",
+    "luna_2b_identity_types",
+    "luna_2c_identity_templates",
+    "luna_2c_core_identity_map",
+    "luna_5b_shadow_pattern"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_daily_collection",
+      "day": 3,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_2a_user_arche",
+      "fields": ["user_id", "archetype_id", "created_at"]
+    },
+    {
+      "table": "luna_5b_user_shadow_pattern",
+      "fields": ["user_id", "shadow_pattern_id", "created_at"]
+    },
+    {
+      "table": "luna_2c_core_identity_events",
+      "fields": [
+        "user_id",
+        "core_belief",
+        "identity_gap",
+        "identity_template_id",
+        "created_at"
+      ]
+    }
+  ],
+  "sonnet_output_schema": {
+    "archetype_id": "uuid aus luna_2a_arche_types oder null",
+    "shadow_pattern_id": "uuid aus luna_5b_shadow_pattern oder null",
+    "core_belief": "einschränkender Glaubenssatz als vollständiger Satz",
+    "identity_gap": "Lücke zwischen Rolle und Authentizität als kurzer Text",
+    "identity_template_id": "uuid aus luna_2c_identity_templates oder null",
+    "identity_shift": "erkannte Verschiebung im Selbstbild",
+    "need_shift": "erkannte Bedürfnisverschiebung",
+    "pattern": "dominantes Muster heute",
+    "emotional_tone": "dominante Emotion",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis",
+    "aha_moment_detected": true
+  },
+  "context_from_supabase": [
+    "pain_point",
+    "pattern",
+    "protective_pattern_id",
+    "stress_response_id",
+    "emotional_tone",
+    "dominant_emotion",
+    "overall_commitment"
+  ],
+  "task": {
+    "title": "Glaubenssatz sichtbar machen",
+    "text": "Schreib diesen Satz auf: '[Glaubenssatz aus Sonnet]'. Darunter zwei Fragen: 'Stimmt das wirklich?' und 'Woher kommt das?'. Nicht beantworten — nur stehen lassen.",
+    "duration_minutes": 10,
+    "difficulty": "mittel"
+  },
+  "aha_trigger": {
+    "type": "deep_aha",
+    "luna_says": "Ich frage mich — woher kommt dieser Satz in dir? Wann hast du das zum ersten Mal gedacht?",
+    "expected_response": "Erkenntnis über Ursprung des Glaubenssatzes — oft aus Kindheit oder prägenden Erlebnissen"
+  }
+}
