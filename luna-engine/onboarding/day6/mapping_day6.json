@@ -1,0 +1,114 @@
+{
+  "day": 6,
+  "intent": "Micro-Challenge & Potenzial entfalten",
+  "aha_moment": "Ich kann das — es funktioniert wirklich.",
+  "opus_ready": false,
+  "collect_fields": [
+    "relationship_pattern",
+    "core_potential",
+    "deep_potential",
+    "being_potential",
+    "expression_strategy",
+    "micro_challenge",
+    "commitment"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_daily_collection",
+    "luna_7c_core_potential",
+    "luna_7c_potential_map",
+    "luna_7d_deep_potential",
+    "luna_7e_being_potential",
+    "luna_8b_relationship_pattern",
+    "luna_8c_core_potential_types",
+    "luna_8d_deep_potential",
+    "luna_8e_being_potential",
+    "luna_6c_expression_strategy",
+    "luna_6c_strategy_map"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_daily_collection",
+      "day": 6,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_7c_core_potential_events",
+      "fields": ["user_id", "core_potential_id", "created_at"]
+    },
+    {
+      "table": "luna_7d_deep_potential_events",
+      "fields": ["user_id", "deep_potential_id", "created_at"]
+    },
+    {
+      "table": "luna_7e_being_potential_events",
+      "fields": ["user_id", "being_potential_id", "created_at"]
+    },
+    {
+      "table": "luna_8b_relationship_pattern_events",
+      "fields": ["user_id", "relationship_pattern_id", "created_at"]
+    },
+    {
+      "table": "luna_6c_expression_strategy_events",
+      "fields": ["user_id", "expression_strategy_id", "micro_challenge", "commitment", "created_at"]
+    }
+  ],
+  "sonnet_output_schema": {
+    "relationship_pattern_id": "uuid aus luna_8b_relationship_pattern oder null",
+    "core_potential_id": "uuid aus luna_7c_core_potential oder null",
+    "deep_potential_id": "uuid aus luna_7d_deep_potential oder null",
+    "being_potential_id": "uuid aus luna_7e_being_potential oder null",
+    "expression_strategy_id": "uuid aus luna_6c_expression_strategy oder null",
+    "micro_challenge": "konkrete Aufgabe für heute als vollständiger Text",
+    "commitment": "stark / mittel / schwach",
+    "identity_shift": "erkannte Verschiebung im Selbstbild",
+    "need_shift": "erkannte Bedürfnisverschiebung",
+    "pattern": "dominantes Muster heute",
+    "emotional_tone": "dominante Emotion",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis des Tages",
+    "aha_moment_detected": false
+  },
+  "context_from_supabase": [
+    "pain_point",
+    "core_belief",
+    "pattern",
+    "protective_pattern_id",
+    "nervous_system_state",
+    "future_identity",
+    "core_drive",
+    "top_values",
+    "strengths_identified",
+    "emotional_tone",
+    "overall_commitment",
+    "readiness_level"
+  ],
+  "task": {
+    "title": "Micro-Challenge — heute noch",
+    "text": "Basierend auf dem Kernthema des Users. Konkret, machbar in 15-30 Minuten, Erfolg fast garantiert. Morgen berichtet der User wie es war.",
+    "duration_minutes": 30,
+    "difficulty": "mittel",
+    "examples_by_theme": {
+      "grenzen": "Sag heute einer Person ehrlich Nein — zu etwas das du eigentlich nicht willst.",
+      "selbstwert": "Nimm heute ein Kompliment an ohne es zu relativieren oder kleinzureden.",
+      "beziehung": "Sag jemandem heute einen ehrlichen Gedanken den du normalerweise für dich behältst.",
+      "kontrolle": "Lass heute eine kleine Sache einfach passieren ohne einzugreifen.",
+      "ausdruck": "Schreib heute 5 Minuten ohne Zensur — alles was gerade in dir ist.",
+      "verbindung": "Ruf heute jemanden an den du schon lange nicht gesprochen hast."
+    }
+  },
+  "aha_trigger": {
+    "type": "action_aha",
+    "luna_says": "Du hast es getan. Das ist nicht nichts — das ist Veränderung in Echtzeit.",
+    "expected_response": "Stolz und Überraschung über die eigene Handlungsfähigkeit"
+  }
+}

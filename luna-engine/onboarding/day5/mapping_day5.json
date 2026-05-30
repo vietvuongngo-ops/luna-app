@@ -1,0 +1,97 @@
+{
+  "day": 5,
+  "intent": "Ressourcen & Stärken aktivieren",
+  "aha_moment": "Sie kennt mich besser als ich mich selbst.",
+  "opus_ready": false,
+  "collect_fields": [
+    "core_drive",
+    "core_motivation",
+    "top_values",
+    "resource_ids",
+    "core_strategy",
+    "strengths_identified"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_daily_collection",
+    "luna_2b_core_motivation",
+    "luna_6a_core_drive",
+    "luna_6b_core_strategy",
+    "luna_6b_core_strategy_events",
+    "luna_8a_core_value_types",
+    "luna_8a_core_need_types",
+    "luna_8b_coping_strategy",
+    "luna_8c_resources",
+    "luna_8c_values_map"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_daily_collection",
+      "day": 5,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_2b_user_motivations",
+      "fields": ["user_id", "core_motivation_id", "created_at"]
+    },
+    {
+      "table": "luna_6a_user_core_drive",
+      "fields": ["user_id", "core_drive_id", "created_at"]
+    },
+    {
+      "table": "luna_8b_user_core_values",
+      "fields": ["user_id", "core_value_id", "rank", "created_at"]
+    },
+    {
+      "table": "luna_8c_resources_events",
+      "fields": ["user_id", "resource_id", "strength_level", "created_at"]
+    }
+  ],
+  "sonnet_output_schema": {
+    "core_drive_id": "uuid aus luna_6a_core_drive oder null",
+    "core_motivation_id": "uuid aus luna_2b_core_motivation oder null",
+    "top_values": ["uuid1", "uuid2", "uuid3"],
+    "resource_ids": ["uuid1", "uuid2"],
+    "core_strategy_id": "uuid aus luna_6b_core_strategy oder null",
+    "strengths_identified": ["Stärke 1 als Text", "Stärke 2 als Text"],
+    "identity_shift": "erkannte Verschiebung im Selbstbild",
+    "need_shift": "erkannte Bedürfnisverschiebung",
+    "pattern": "dominantes Muster heute",
+    "emotional_tone": "dominante Emotion",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis des Tages",
+    "aha_moment_detected": true
+  },
+  "context_from_supabase": [
+    "pain_point",
+    "core_belief",
+    "pattern",
+    "protective_pattern_id",
+    "nervous_system_state",
+    "regulation_strategy",
+    "future_identity",
+    "emotional_tone",
+    "overall_commitment",
+    "strengths_identified"
+  ],
+  "task": {
+    "title": "3 Stärken aufschreiben",
+    "text": "Schreib heute Abend 3 Dinge auf die du an dir selbst schätzt. Nicht was du tust oder leistest — was du bist. Klingt einfach. Ist es nicht. Aber du schaffst das.",
+    "duration_minutes": 10,
+    "difficulty": "mittel"
+  },
+  "aha_trigger": {
+    "type": "recognition_aha",
+    "luna_says": "Ich habe in unseren Gesprächen etwas bemerkt das du vielleicht selbst noch nicht siehst. Darf ich es dir zeigen?",
+    "expected_response": "Überraschung und Rührung — emotionale Bindung auf Höhepunkt"
+  }
+}

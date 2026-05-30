@@ -1,0 +1,87 @@
+{
+  "day": 4,
+  "intent": "Nervensystem & Identität erkunden",
+  "aha_moment": "Mein Körper weiß das schon lange.",
+  "opus_ready": false,
+  "collect_fields": [
+    "nervous_system_state",
+    "body_signals",
+    "regulation_strategy",
+    "growth_path",
+    "future_identity"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_daily_collection",
+    "luna_3a_nervous_system",
+    "luna_5d_body_signal",
+    "luna_5d_body_signal_map",
+    "luna_5e_growth_path",
+    "luna_5e_growth_path_map",
+    "luna_5c_stress_response_map",
+    "luna_3c_nervous_system_map"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_daily_collection",
+      "day": 4,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_3b_nervous_system_events",
+      "fields": ["user_id", "nervous_system_state", "created_at"]
+    },
+    {
+      "table": "luna_5d_user_body_signal",
+      "fields": ["user_id", "body_signal_id", "created_at"]
+    },
+    {
+      "table": "luna_5e_user_growth_path",
+      "fields": ["user_id", "growth_path_id", "regulation_strategy", "created_at"]
+    }
+  ],
+  "sonnet_output_schema": {
+    "nervous_system_state": "hyperaktiviert / reguliert / hypoaktiviert",
+    "regulation_ability": "niedrig / mittel / hoch",
+    "body_signal_ids": ["uuid1", "uuid2"],
+    "growth_path_id": "uuid aus luna_5e_growth_path oder null",
+    "regulation_strategy": "erkannte Regulationsstrategie als Text",
+    "future_identity": "Beschreibung der Zukunftsvision in eigenen Worten des Users",
+    "identity_shift": "erkannte Verschiebung im Selbstbild",
+    "need_shift": "erkannte Bedürfnisverschiebung",
+    "pattern": "dominantes Muster heute",
+    "emotional_tone": "dominante Emotion",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis des Tages",
+    "aha_moment_detected": false
+  },
+  "context_from_supabase": [
+    "pain_point",
+    "core_belief",
+    "pattern",
+    "protective_pattern_id",
+    "stress_response_id",
+    "emotional_tone",
+    "overall_commitment"
+  ],
+  "task": {
+    "title": "Nervensystem-Übung bei Stress",
+    "text": "Heute Abend — wenn du Stress spürst: Leg eine Hand auf dein Herz. Atme 4 Sekunden ein. Halte 2 Sekunden. Atme 6 Sekunden aus. Drei Mal. Das ist alles. Dein Nervensystem kennt den Weg — du zeigst ihm nur die Richtung.",
+    "duration_minutes": 5,
+    "difficulty": "leicht"
+  },
+  "aha_trigger": {
+    "type": "body_aha",
+    "luna_says": "Was spürst du gerade in deinem Körper wenn du daran denkst — nicht die Gedanken, das körperliche Gefühl?",
+    "expected_response": "Körperwahrnehmung — der User spürt statt nur zu denken"
+  }
+}

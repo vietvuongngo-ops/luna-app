@@ -1,0 +1,215 @@
+{
+  "day": 7,
+  "intent": "Revue, Aha-Spiegel & Premium-Kaufempfehlung",
+  "aha_moment": "So hat mich noch nie jemand beschrieben. Das bin wirklich ich.",
+  "opus_ready": true,
+  "collect_fields": [
+    "vision_archetype",
+    "effect_space",
+    "core_need",
+    "vision_text",
+    "blocking_belief",
+    "micro_challenge_result"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_daily_collection",
+    "luna_onboarding_commitment",
+    "luna_9a_vision_archetypes",
+    "luna_9c_vision_map",
+    "luna_6d_effect_space",
+    "luna_7a_core_need",
+    "luna_8a_core_need_types",
+    "luna_1c_emotion_need_map",
+    "luna_2b_identity_types",
+    "luna_2c_core_identity_types",
+    "luna_2c_core_identity_map",
+    "luna_modules",
+    "luna_phases",
+    "luna_map_needs",
+    "luna_map_identity"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_daily_collection",
+      "day": 7,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_9b_user_vision",
+      "fields": [
+        "user_id",
+        "vision_archetype_id",
+        "vision_text",
+        "blocking_belief",
+        "effect_space_id",
+        "created_at"
+      ]
+    },
+    {
+      "table": "luna_opus_master_result",
+      "fields": [
+        "user_id",
+        "core_theme",
+        "core_pattern",
+        "core_drive",
+        "core_potential",
+        "transformation_potential",
+        "recommended_modules",
+        "week_8_focus",
+        "week_12_goal",
+        "conversion_message",
+        "risk_flag",
+        "created_at"
+      ]
+    },
+    {
+      "table": "luna_onboarding",
+      "fields": [
+        "status",
+        "opus_analysis_done",
+        "converted_at"
+      ],
+      "action": "UPDATE WHERE user_id"
+    },
+    {
+      "table": "luna_0_profiles",
+      "fields": [
+        "onboarding_status",
+        "current_module_id",
+        "user_themes",
+        "milestones"
+      ],
+      "action": "UPDATE WHERE user_id"
+    }
+  ],
+  "sonnet_output_schema": {
+    "vision_archetype_id": "uuid aus luna_9a_vision_archetypes oder null",
+    "effect_space_id": "uuid aus luna_6d_effect_space oder null",
+    "core_need_id": "uuid aus luna_7a_core_need oder null",
+    "vision_text": "Zukunftsvision in eigenen Worten des Users",
+    "blocking_belief": "Was den User noch zurückhält als vollständiger Satz",
+    "micro_challenge_result": "Hat der User die Challenge gemacht? ja / nein / teilweise",
+    "identity_shift": "finale Identitätsverschiebung über alle 7 Tage",
+    "need_shift": "finale Bedürfnisverschiebung",
+    "pattern": "dominantes Muster Tag 7",
+    "emotional_tone": "dominante Emotion",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis der gesamten Reise",
+    "aha_moment_detected": true
+  },
+  "opus_input": {
+    "source_tables": [
+      "luna_daily_collection (day 1-7)",
+      "luna_onboarding_commitment",
+      "luna_2a_user_arche",
+      "luna_5b_user_shadow_pattern",
+      "luna_2c_core_identity_events",
+      "luna_3b_nervous_system_events",
+      "luna_5d_user_body_signal",
+      "luna_5e_user_growth_path",
+      "luna_2b_user_motivations",
+      "luna_6a_user_core_drive",
+      "luna_8b_user_core_values",
+      "luna_8c_resources_events",
+      "luna_7c_core_potential_events",
+      "luna_7d_deep_potential_events",
+      "luna_8b_relationship_pattern_events",
+      "luna_6c_expression_strategy_events",
+      "luna_9b_user_vision",
+      "luna_modules",
+      "luna_phases",
+      "luna_map_needs",
+      "luna_map_identity"
+    ],
+    "runs": "einmalig — nur wenn opus_analysis_done = false"
+  },
+  "opus_output_schema": {
+    "core_theme": "Das tiefste Kernthema des Users (1 präziser Satz)",
+    "core_pattern": "Das dominante Muster über alle 7 Tage (1 Satz)",
+    "core_drive": "Der tiefste Antrieb des Users (1 Wort oder kurzer Text)",
+    "core_potential": "Das ungenutzte Potenzial (1 Satz)",
+    "transformation_potential": "niedrig / mittel / hoch",
+    "recommended_modules": [
+      {
+        "priority": 1,
+        "module_id": "UUID aus luna_modules",
+        "module_name": "Modulname",
+        "reason": "Warum dieses Modul zuerst (1 Satz)",
+        "method": "Hauptmethode",
+        "techniques": ["Technik 1", "Technik 2"],
+        "duration_weeks": 4
+      },
+      {
+        "priority": 2,
+        "module_id": "UUID aus luna_modules",
+        "module_name": "Modulname",
+        "reason": "Warum dieses Modul zweites (1 Satz)",
+        "method": "Hauptmethode",
+        "techniques": ["Technik 1"],
+        "duration_weeks": 4
+      },
+      {
+        "priority": 3,
+        "module_id": "UUID aus luna_modules",
+        "module_name": "Modulname",
+        "reason": "Warum dieses Modul drittes (1 Satz)",
+        "method": "Hauptmethode",
+        "techniques": ["Technik 1"],
+        "duration_weeks": 4
+      }
+    ],
+    "week_8_focus": "Fokus für Wochen 2-3 des Paid-Programms (1 Satz)",
+    "week_12_goal": "Ziel am Ende der 12 Wochen (1 Satz)",
+    "conversion_message": "Lunas persönliche Kaufempfehlung (2-3 Sätze, warm, direkt, bezieht sich auf core_theme und core_potential)",
+    "risk_flag": "Warnsignal falls psychisches Risiko erkannt — sonst null"
+  },
+  "context_from_supabase": [
+    "pain_point",
+    "core_belief",
+    "pattern",
+    "core_drive",
+    "top_values",
+    "strengths_identified",
+    "future_identity",
+    "micro_challenge",
+    "commitment",
+    "nervous_system_state",
+    "overall_commitment",
+    "readiness_level",
+    "emotional_tone"
+  ],
+  "post_day7_triggers": [
+    {
+      "trigger": "ManyChat Webhook",
+      "condition": "opus_analysis_done = true",
+      "action": "E-Mail + WhatsApp senden",
+      "payload": ["user_email", "core_theme", "next_module_name", "conversion_message", "offer_link", "opus_report_url"]
+    },
+    {
+      "trigger": "Supabase UPDATE",
+      "condition": "immer",
+      "action": "luna_onboarding status = completed, opus_analysis_done = true"
+    }
+  ],
+  "task": {
+    "title": "Kaufentscheidung in Ruhe treffen",
+    "text": "Keine Aufgabe heute. Luna schickt eine E-Mail. Lies sie in Ruhe. Spür nach. Keine Entscheidung jetzt.",
+    "duration_minutes": 0,
+    "difficulty": "keine"
+  },
+  "aha_trigger": {
+    "type": "recognition_aha",
+    "luna_says": "Ich sehe in dir jemanden der {{core_theme}}. Das habe ich in 7 Tagen gehört — in jedem Satz den du geschrieben hast.",
+    "expected_response": "Tiefe Berührung — der User fühlt sich zum ersten Mal wirklich gesehen"
+  }
+}

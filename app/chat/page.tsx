@@ -70,7 +70,7 @@ function ChatContent() {
     setSending(true);
 
     try {
-      const history = messages.slice(-6).map(({ role, content }) => ({ role, content }));
+      const history = messages.map(({ role, content }) => ({ role, content }));
 
       const data = await postToN8n<ChatResponse>(
         process.env.NEXT_PUBLIC_N8N_CHAT!,

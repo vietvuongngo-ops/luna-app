@@ -1,0 +1,81 @@
+{
+  "day": 2,
+  "intent": "Schmerzpunkt identifizieren",
+  "aha_moment": "Ich mache das immer so.",
+  "opus_ready": false,
+  "collect_fields": [
+    "protective_pattern",
+    "stress_response",
+    "body_signals",
+    "coping_strategy",
+    "pain_point"
+  ],
+  "supabase_read": [
+    "luna_onboarding",
+    "luna_daily_collection",
+    "luna_onboarding_commitment",
+    "luna_5a_protective_pattern",
+    "luna_5c_stress_response",
+    "luna_5d_body_signal",
+    "luna_7b_coping_strategy"
+  ],
+  "supabase_write": [
+    {
+      "table": "luna_daily_collection",
+      "day": 2,
+      "fields": [
+        "collected_data",
+        "identity_shift",
+        "need_shift",
+        "pattern",
+        "emotional_tone",
+        "readiness_level",
+        "key_insight",
+        "aha_moment"
+      ]
+    },
+    {
+      "table": "luna_5c_user_stress_response",
+      "fields": ["user_id", "stress_response_id", "created_at"]
+    },
+    {
+      "table": "luna_5d_user_body_signal",
+      "fields": ["user_id", "body_signal_id", "created_at"]
+    },
+    {
+      "table": "luna_7b_coping_strategy_events",
+      "fields": ["user_id", "coping_strategy_id", "created_at"]
+    }
+  ],
+  "sonnet_output_schema": {
+    "protective_pattern_id": "uuid aus luna_5a_protective_pattern oder null",
+    "stress_response_id": "uuid aus luna_5c_stress_response oder null",
+    "body_signal_ids": ["uuid1", "uuid2"],
+    "coping_strategy_id": "uuid aus luna_7b_coping_strategy oder null",
+    "pain_point": "erkannter Schmerzpunkt als kurzer Text",
+    "identity_shift": "erste Beobachtung zur Identität oder null",
+    "need_shift": "erkannte Bedürfnisverschiebung oder null",
+    "pattern": "erkanntes Verhaltensmuster als kurzer Text",
+    "emotional_tone": "dominante Emotion heute",
+    "readiness_level": "niedrig / mittel / hoch",
+    "key_insight": "wichtigste Erkenntnis des Tages",
+    "aha_moment_detected": false
+  },
+  "context_from_supabase": [
+    "manifestation_resonance",
+    "overall_commitment",
+    "dominant_emotion",
+    "yes_strength"
+  ],
+  "task": {
+    "title": "Schmerzpunkt aufschreiben",
+    "text": "Schreib einen einzigen Satz auf — für dich allein: Was ist das Eine, das mich gerade am meisten zurückhält? Nicht zeigen. Nicht teilen. Nur für dich. Der Satz ist der Anfang.",
+    "duration_minutes": 5,
+    "difficulty": "leicht"
+  },
+  "aha_trigger": {
+    "type": "mini_aha",
+    "luna_says": "Ich habe bemerkt, dass du in solchen Momenten oft {{pattern}}. Erkennst du das?",
+    "expected_response": "Wiedererkennung — kein Widerstand"
+  }
+}
